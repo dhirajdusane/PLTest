@@ -10,7 +10,5 @@ namespace ApplicationNamespace.Interfaces
     {
         IEnumerable<Data> YieldRandomData(int recordCount, FrequencyEnum frequency);
         IEnumerable<Data> GetRandomDataList(int recordCount, FrequencyEnum frequency);
-
-        FrequencyEnum GetDefaultFrequency();
     }
 }

@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Prism, Version=5.7.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.5.7.0-pre3\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -58,8 +62,10 @@
     </ApplicationDefinition>
     <Compile Include="ClassTypes.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="Interfaces\IDataModel.cs" />
     <Compile Include="RandomDataGenerator.cs" />
     <Compile Include="ViewModel.cs" />
+    <Compile Include="XMLFileReaderWriter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +99,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -10,7 +10,7 @@ namespace ApplicationNamespace
 {
     public class RandomDataGenerator : IDataGenerator
     {
-        public FrequencyEnum GetDefaultFrequency()
+        public static FrequencyEnum GetDefaultFrequency()
         {
             FrequencyEnum enumValue = FrequencyEnum.PerMinute;
             Enum.TryParse<FrequencyEnum>(ConfigurationManager.AppSettings[Constants.DefaultStartDate], out enumValue);
