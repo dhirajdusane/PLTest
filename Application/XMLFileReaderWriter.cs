@@ -21,37 +21,29 @@ namespace ApplicationNamespace
             namespaces = new XmlSerializerNamespaces();
             namespaces.Add("", "");
 
-            serializer = new XmlSerializer(typeof(string));
+            serializer = new XmlSerializer(typeof(Data));
         }
 
         public XMLFileReaderWriter(TextReader target) : this()
         {
             reader = XmlReader.Create(target);
-            //reader.ReadStartElement();
         }
 
         public XMLFileReaderWriter(TextWriter target) : this()
         {
             writer = XmlWriter.Create(target);
-            writer.WriteStartElement("BillingFile");
+            writer.WriteStartElement("TickData");
         }
 
         public void Write(Data data)
         {
-            //if (_disposed) throw new ObjectDisposedException("AccountWriter");
-            //
-            //if (!_wroteHeader)
-            //{
-            //    _writer.WriteStartElement("BillingFile");
-            //    _wroteHeader = true;
-            //}
-
-            serializer.Serialize(writer, data.ToString(), namespaces);
+            data.StringData = data.ToString();
+            serializer.Serialize(writer, data, namespaces);
         }
 
-        public IEnumerable<string> Read()
+        public IEnumerable<Data> Read()
         {
-            if (!reader.IsStartElement("BillingFile"))
+            if (!reader.IsStartElement("TickData"))
             {
                 yield break;
             }
@@ -61,27 +53,24 @@ namespace ApplicationNamespace
             while (reader.MoveToContent() == XmlNodeType.Element)
             {
                 object o = serializer.Deserialize(reader);
-                yield return "";
+                yield return o as Data;
             }
-
-            //reader.Read();
-            //while (reader.MoveToContent() == XmlNodeType.Text)
-            //{
-            //    object obj = serializer.Deserialize(reader);
-            //}
         }
 
         public void Dispose()
         {
             if (writer != null)
+            {
                 writer.WriteEndElement();
+                writer.Dispose();
+            }
 
             if (reader != null)
                 reader.ReadEndElement();
         }
     }
 
-    [Serializable]
+    [Serializable]    
     public class dataClass
     {
         [XmlElement("data")]
