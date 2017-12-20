@@ -25,7 +25,7 @@ namespace ApplicationNamespace
             }
         }
 
-        public IEnumerable<Data> ReadXMLFile(string fullFilePath, int count, FrequencyEnum frequency)
+        public IEnumerable<Data> ReadXMLFile(string fullFilePath)
         {
             using (StreamReader reader = new StreamReader(fullFilePath))
             {

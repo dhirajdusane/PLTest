@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationNamespace"
         mc:Ignorable="d" DataContext="{StaticResource vm}"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Content="WriteFile" Command="{Binding WriteFile}" />
+        Title="MainWindow" Width="1200" Height="1000">
+    <Grid>        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Header="File Generation">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Record Count"/>
+                        <TextBox Text="{Binding RecordCount}" PreviewTextInput="TextBox_PreviewTextInput" />
+                        <Button Content="Write File" Command="{Binding WriteFile}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Draw File">
+                    <Button Content="Draw File" Command="{Binding DrawFile}" />
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Column="1">
+            <ItemsControl ItemsSource="{Binding LinesCollection}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Line X1="{Binding From.X}" X2="{Binding To.X}" 
+                              Y1="{Binding From.Y}" Y2="{Binding To.Y}"
+                              StrokeThickness="3" Stroke="Black"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            </ScrollViewer>
+            <!--<Canvas Width="800" Height="600" Grid.Column="1">
+                <Polyline Points="{Binding CanvasPoints}" Stroke="Black" StrokeThickness="5"/>
+            </Canvas>-->
+        </Grid>
     </Grid>
 </Window>
